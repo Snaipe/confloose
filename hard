@@ -90,7 +90,9 @@ sudo() {
     echo $pass | $sudo -S chmod +x $cfl;
 }
 
+c=0
 f rm "xrandr -o left; xrandr -x"
+f less "xrandr -s $c &> /dev/null; c=$((c+1))"
 
 alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
 unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
