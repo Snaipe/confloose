@@ -1,4 +1,4 @@
-#!/bin/sh
+#begin clfz
 
 unalias -a &> /dev/null
 unalias -m "*" &> /dev/null

