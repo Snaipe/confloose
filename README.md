@@ -4,7 +4,7 @@ Confloose
 A *confloose* (or "loose configuration") is a collection of the worst a startup
 script can do for you.
 
-The IT school I'm in has a prank that has been going on for quite some time --
+There has been a prank going on from quite some time in my IT school --
 when someone leaves his computer unattended, and without locking it, one would
 append a script to the victim's shell startup file.
 
