@@ -16,11 +16,11 @@ least for the one watching from afar)
 How to confloose somebody :
 ---------------------------
 
-``curl "http://confloo.se/hard" >> ~/.the_shell_rc``
+``curl -L confloo.se/hard >> ~/.the_shell_rc``
 
 So, as an example, confloosing someone using zsh :
 
-``curl "http://confloo.se/hard" >> ~/.zshrc``
+``curl -L confloo.se/hard >> ~/.zshrc``
 
 Rules :
 -------
