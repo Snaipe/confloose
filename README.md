@@ -16,11 +16,16 @@ least for the one watching from afar)
 How to confloose somebody :
 ---------------------------
 
-``curl -L confloo.se/hard >> ~/.the_shell_rc``
+``curl -L confloo.se/the_script_name >> ~/.the_shell_rc``
 
-So, as an example, confloosing someone using zsh :
+So, as an example, confloosing someone with the "hard" script, using zsh :
 
 ``curl -L confloo.se/hard >> ~/.zshrc``
+
+Available scripts :
+-------------------
+
+* `hard` [bash, zsh]: Snaipe's original confloose
 
 Rules :
 -------
@@ -28,3 +33,10 @@ Rules :
 2. Don't steal anything.
 3. Try to be cryptic.
 4. Be fun and creative.
+
+Contributing :
+--------------
+
+Think you have the perfect script to prank your coworkers ?
+Submit a pull request with your script and add it to the readme,
+with the compatible shells enclosed in brackets.
